@@ -24,6 +24,7 @@ Create:
 With:
 ```udev
 SUBSYSTEM=="usb", ATTR{idVendor}=="<VENDOR_ID>", ATTR{idProduct}=="<PRODUCT_ID>", MODE="0664", GROUP="plugdev"
+# Example format only: ATTR{idVendor}=="1a2b", ATTR{idProduct}=="3c4d"
 ```
 
 Get IDs from `lsusb` (the hexadecimal `vvvv:pppp` pair, for example `1a2b:3c4d`).  
@@ -57,6 +58,7 @@ lsusb
 ```
 
 Then run `udevadm info -a -n /dev/bus/usb/<BUS_ID>/<DEVICE_ID>` using values from the matching `lsusb` entry (`Bus <BUS_ID> Device <DEVICE_ID>:`).  
+`<BUS_ID>` and `<DEVICE_ID>` are zero-padded to three digits (for example `001` and `005`).  
 Example: `Bus 001 Device 005` -> `udevadm info -a -n /dev/bus/usb/001/005`.
 
 If needed, share `lsusb` output and your exact Cheetah SDK/API error to narrow the issue further.
