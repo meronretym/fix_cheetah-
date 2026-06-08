@@ -23,10 +23,14 @@ Create:
 
 With:
 ```udev
-SUBSYSTEM=="usb", ATTR{idVendor}=="<VENDOR_ID>", ATTR{idProduct}=="<PRODUCT_ID>", MODE="0666"
+SUBSYSTEM=="usb", ATTR{idVendor}=="<VENDOR_ID>", ATTR{idProduct}=="<PRODUCT_ID>", MODE="0664", GROUP="plugdev"
 ```
 
 Get IDs from `lsusb` (the hexadecimal `vvvv:pppp` pair, for example `1a2b:3c4d`).
+Ensure your user is in `plugdev`:
+```bash
+sudo usermod -aG plugdev $USER
+```
 
 Then reload rules:
 ```bash
