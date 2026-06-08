@@ -27,6 +27,7 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="<VENDOR_ID>", ATTR{idProduct}=="<PRODUCT_ID>"
 # Example format only: ATTR{idVendor}=="1a2b", ATTR{idProduct}=="3c4d"
 ```
 Replace `<VENDOR_ID>` and `<PRODUCT_ID>` with the values from your device's `lsusb` output.
+Do not include the `<` `>` characters in the final rule.
 
 Get IDs from `lsusb` output in this format: `Bus XXX Device YYY: ID vvvv:pppp ...`  
 Use the hexadecimal `vvvv:pppp` pair from your adapter (do not copy example values).  
@@ -59,7 +60,7 @@ If your app still fails to open the adapter, test once with `sudo` to confirm it
 lsusb
 ```
 
-Then run `udevadm info -a -n /dev/bus/usb/<BUS_ID>/<DEVICE_ID>` using values from the matching `lsusb` entry (`Bus <BUS_ID> Device <DEVICE_ID>: ID vvvv:pppp`).  
+Then run `sudo udevadm info -a -n /dev/bus/usb/<BUS_ID>/<DEVICE_ID>` using values from the matching `lsusb` entry (`Bus <BUS_ID> Device <DEVICE_ID>: ID vvvv:pppp`).  
 `<BUS_ID>` and `<DEVICE_ID>` are zero-padded to three digits (for example `001` and `005`).  
 Example: `Bus 001 Device 005` -> `sudo udevadm info -a -n /dev/bus/usb/001/005`.
 
