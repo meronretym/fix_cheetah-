@@ -26,7 +26,7 @@ With:
 SUBSYSTEM=="usb", ATTR{idVendor}=="<VENDOR_ID>", ATTR{idProduct}=="<PRODUCT_ID>", MODE="0666"
 ```
 
-Get IDs from `lsusb` (the `vvvv:pppp` pair, for example `1a2b:3c4d`).
+Get IDs from `lsusb` (the hexadecimal `vvvv:pppp` pair, for example `1a2b:3c4d`).
 
 Then reload rules:
 ```bash
@@ -51,6 +51,7 @@ If your app still fails to open the adapter, test once with `sudo` to confirm it
 lsusb
 ```
 
-Then run `udevadm info -a -n /dev/bus/usb/<BUS>/<DEVICE>` using values from the matching `lsusb` entry (`Bus <BUS> Device <DEVICE>:`).
+Then run `udevadm info -a -n /dev/bus/usb/<BUS>/<DEVICE>` using values from the matching `lsusb` entry (`Bus <BUS> Device <DEVICE>:`).  
+Example: `Bus 001 Device 005` -> `udevadm info -a -n /dev/bus/usb/001/005`.
 
 If needed, share `lsusb` output and your exact Cheetah SDK/API error to narrow the issue further.
