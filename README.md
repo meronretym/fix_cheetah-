@@ -27,8 +27,9 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="<VENDOR_ID>", ATTR{idProduct}=="<PRODUCT_ID>"
 # Example format only: ATTR{idVendor}=="1a2b", ATTR{idProduct}=="3c4d"
 ```
 
-Get IDs from `lsusb` (the hexadecimal `vvvv:pppp` pair, for example `1a2b:3c4d`).  
-Use the IDs reported by your own adapter (do not copy example values).
+Get IDs from `lsusb` output in this format: `Bus XXX Device YYY: ID vvvv:pppp ...`  
+Use the hexadecimal `vvvv:pppp` pair from your adapter (do not copy example values).  
+Tip: Total Phase devices often show vendor ID `1679`.
 Ensure your user is in `plugdev`:
 ```bash
 sudo usermod -aG plugdev $USER
@@ -57,7 +58,7 @@ If your app still fails to open the adapter, test once with `sudo` to confirm it
 lsusb
 ```
 
-Then run `udevadm info -a -n /dev/bus/usb/<BUS_ID>/<DEVICE_ID>` using values from the matching `lsusb` entry (`Bus <BUS_ID> Device <DEVICE_ID>:`).  
+Then run `udevadm info -a -n /dev/bus/usb/<BUS_ID>/<DEVICE_ID>` using values from the matching `lsusb` entry (`Bus XXX Device YYY: ID vvvv:pppp`).  
 `<BUS_ID>` and `<DEVICE_ID>` are zero-padded to three digits (for example `001` and `005`).  
 Example: `Bus 001 Device 005` -> `udevadm info -a -n /dev/bus/usb/001/005`.
 
